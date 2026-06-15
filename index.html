@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ראיון מנצח – הכנה חכמה לראיון עבודה</title>
     
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,7 @@
             font-family: 'Assistant', sans-serif;
             background-color: #f0f7f4;
         }
+        /* פקודה חותכת וחד-משמעית להצגה והסתרה של טאבים */
         .tab-content { 
             display: none !important; 
         }
@@ -84,7 +85,7 @@
                 </div>
 
                 <div class="w-full md:w-5/12 bg-slate-900 aspect-video rounded-xl shadow-xl overflow-hidden relative flex flex-col items-center justify-center text-white p-6 text-center border-2 border-teal-600/30">
-                    <div class="bg-teal-600/80 hover:bg-teal-500 text-white p-4 rounded-full mb-3 cursor-pointer transition-all shadow-md animate-bounce" onclick="alert('כאן ישולב סרטון ההדרכה שלך! כרגע זהו מקום ייעודי המציג כיצד הנגן ישתלב בעיצוב האתר.')">
+                    <div class="bg-teal-600 hover:bg-teal-500 text-white p-4 rounded-full mb-3 cursor-pointer transition-all shadow-md" onclick="alert('כאן ישולב סרטון ההדרכה שלך! כרגע זהו מקום ייעודי המציג כיצד הנגן ישתלב בעיצוב האתר.')">
                         <i class="fa-solid fa-play text-2xl text-white"></i>
                     </div>
                     <p class="font-bold text-sm text-teal-200">סרטון פתיחה: מדוע ראיונות רפואיים מצליחים או נכשלים?</p>
@@ -229,7 +230,7 @@
         <section id="exam" class="tab-content space-y-6">
             <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-center">
                 <h3 class="text-2xl font-bold text-slate-800 mb-1">מבחן מסכם מקיף – מוכנות לראיון</h3>
-                <p class="text-slate-500 text-sm mb-4">המבחן המורחב מכיל כעת שאלות מפתח מורכבות בנושאי סיעוד, שירות מטופלים בקופות חולים, אתיקה רפואית ועבודה בצוות רב-מקצועי.</p>
+                <p class="text-slate-500 text-sm mb-4">המבחן המורחב מכיל 10 שאלות מפתח מורכבות בנושאי סיעוד, שירות מטופלים בקופות חולים, אתיקה רפואית ועבודה בצוות.</p>
                 <button onclick="startFinalExam()" id="btn-start-exam" class="bg-cyan-600 text-white font-bold px-8 py-3 rounded-xl cursor-pointer mt-2 hover:bg-cyan-700 shadow-md transition-all">התחל מבחן מורחב כעת</button>
             </div>
             
@@ -250,7 +251,7 @@
     </footer>
 
     <script>
-        // ניהול ניקוד משתמש (גיימיפיקציה)
+        // ניהול ניקוד
         let xp = 0;
         function addXP(amount) {
             xp += amount;
@@ -263,14 +264,21 @@
             document.getElementById('global-rank').innerText = rank;
         }
 
-        // ניווט לשוניות
+        // פונקציית ניווט חסינת תקלות - פותרת את בעיית הטאבים לתמיד
         function switchTab(tabId) {
+            // הסתרת כל התכנים באופן אקטיבי ומיידי
             const allContents = document.querySelectorAll('.tab-content');
-            allContents.forEach(content => content.classList.remove('active'));
+            for(let i=0; i<allContents.length; i++) {
+                allContents[i].classList.remove('active');
+            }
 
+            // הצגת התוכן הספציפי שנבחר
             const targetContent = document.getElementById(tabId);
-            if (targetContent) targetContent.classList.add('active');
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
 
+            // עדכון המראה של כפתורי הניווט
             const allButtons = document.querySelectorAll('.nav-btn');
             allButtons.forEach(btn => {
                 btn.classList.remove('text-white', 'border-white');
@@ -293,13 +301,5 @@
                     <div class="space-y-4">
                         <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">שאלת היכרות</span>
                         <h4 class="font-bold text-lg text-slate-800">"ספר/י לי על עצמך ומה מושך אותך לעבוד דווקא בארגון רפואי/שירותי כמו שלנו?"</h4>
-                        <p class="text-xs text-slate-500">טיפ: אל תחזרו על קורות החיים. התמקדו בחיבור הרגשי והמקצועי שלכם לטיפול ובערך שאתם מביאים.</p>
-                        <textarea id="sim-ans-1" class="w-full border p-3 mt-2 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none text-sm h-28" placeholder="הקלידו את תשובתכם כאן בפירוט..."></textarea>
-                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl text-sm font-bold transition-colors cursor-pointer" onclick="evaluateSimAnswer(1)">שלח לבדיקה וניתוח</button>
-                        <div id="sim-feedback-1" class="hidden p-4 rounded-xl text-sm"></div>
-                    </div>
-                `;
-            } else {
-                box.innerHTML = `
-                    <div class="space-y-4">
-                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">
+                        <textarea id="sim-ans-1" class="w-full border p-3 mt-2 rounded-xl outline-none text-sm h-28" placeholder="הקלידו את תשובתכם כאן בפירוט..."></textarea>
+                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl text-sm font-bold transition-colors cursor-pointer" onclick="evaluateSimAnswer(1)">שלח לבדיקה
