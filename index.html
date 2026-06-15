@@ -82,6 +82,14 @@
                         </button>
                     </div>
                 </div>
+
+                <div class="w-full md:w-5/12 bg-slate-900 aspect-video rounded-xl shadow-xl overflow-hidden relative flex flex-col items-center justify-center text-white p-6 text-center border-2 border-teal-600/30">
+                    <div class="bg-teal-600/80 hover:bg-teal-500 text-white p-4 rounded-full mb-3 cursor-pointer transition-all shadow-md animate-bounce" onclick="alert('כאן ישולב סרטון ההדרכה שלך! כרגע זהו מקום ייעודי המציג כיצד הנגן ישתלב בעיצוב האתר.')">
+                        <i class="fa-solid fa-play text-2xl text-white"></i>
+                    </div>
+                    <p class="font-bold text-sm text-teal-200">סרטון פתיחה: מדוע ראיונות רפואיים מצליחים או נכשלים?</p>
+                    <p class="text-xs text-slate-400 mt-1">לחצו על כפתור הניגון להסבר</p>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -221,13 +229,13 @@
         <section id="exam" class="tab-content space-y-6">
             <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-center">
                 <h3 class="text-2xl font-bold text-slate-800 mb-1">מבחן מסכם מקיף – מוכנות לראיון</h3>
-                <p class="text-slate-500 text-sm mb-4">המבחן מכיל שאלות מפתח בנושאי מודל STAR, התמודדות עם שחיקה, אתיקה רפואית ושירות מטופלים.</p>
-                <button onclick="startFinalExam()" id="btn-start-exam" class="bg-cyan-600 text-white font-bold px-8 py-3 rounded-xl cursor-pointer mt-2 hover:bg-cyan-700 shadow-md transition-all">התחל מבחן כעת</button>
+                <p class="text-slate-500 text-sm mb-4">המבחן המורחב מכיל כעת שאלות מפתח מורכבות בנושאי סיעוד, שירות מטופלים בקופות חולים, אתיקה רפואית ועבודה בצוות רב-מקצועי.</p>
+                <button onclick="startFinalExam()" id="btn-start-exam" class="bg-cyan-600 text-white font-bold px-8 py-3 rounded-xl cursor-pointer mt-2 hover:bg-cyan-700 shadow-md transition-all">התחל מבחן מורחב כעת</button>
             </div>
             
             <div id="exam-workspace" class="hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-md space-y-6">
                 <div class="flex justify-between items-center border-b pb-3">
-                    <span class="font-bold text-slate-600" id="exam-progress">שאלה 1 מתוך 5</span>
+                    <span class="font-bold text-slate-600" id="exam-progress">שאלה 1 מתוך 10</span>
                     <span class="text-xs bg-cyan-100 text-cyan-800 px-2 py-1 rounded-full font-bold">מבחן פעיל</span>
                 </div>
                 <div id="exam-question-box" class="space-y-4">
@@ -248,10 +256,10 @@
             xp += amount;
             document.getElementById('global-xp').innerText = xp;
             
-            // עדכון דרגה
             let rank = "מתלמד/ת";
             if (xp >= 50) rank = "עוזר/ת מקצועי/ת";
-            if (xp >= 100) rank = "מומחה/ית ראיונות";
+            if (xp >= 120) rank = "מומחה/ית ראיונות";
+            if (xp >= 200) rank = "מאסטר בראיונות בריאות";
             document.getElementById('global-rank').innerText = rank;
         }
 
@@ -283,7 +291,7 @@
             if(cat === 'intro') {
                 box.innerHTML = `
                     <div class="space-y-4">
-                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">שאלת היקורת</span>
+                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">שאלת היכרות</span>
                         <h4 class="font-bold text-lg text-slate-800">"ספר/י לי על עצמך ומה מושך אותך לעבוד דווקא בארגון רפואי/שירותי כמו שלנו?"</h4>
                         <p class="text-xs text-slate-500">טיפ: אל תחזרו על קורות החיים. התמקדו בחיבור הרגשי והמקצועי שלכם לטיפול ובערך שאתם מביאים.</p>
                         <textarea id="sim-ans-1" class="w-full border p-3 mt-2 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none text-sm h-28" placeholder="הקלידו את תשובתכם כאן בפירוט..."></textarea>
@@ -294,201 +302,4 @@
             } else {
                 box.innerHTML = `
                     <div class="space-y-4">
-                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">התמודדות עם לחץ ושירות</span>
-                        <h4 class="font-bold text-lg text-slate-800">"תאר/י מקרה שבו פגשת מטופל או לקוח כועס, מתוסכל או חסר סבלנות קיצוני. כיצד פעלת?"</h4>
-                        <p class="text-xs text-slate-500">טיפ: השתמשו במודל STAR (רקע, משימה, פעולה, תוצאה). הראו הקשבה, אמפתיה ופתרון מעשי.</p>
-                        <textarea id="sim-ans-2" class="w-full border p-3 mt-2 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none text-sm h-28" placeholder="הקלידו את תשובתכם כאן בפירוט..."></textarea>
-                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl text-sm font-bold transition-colors cursor-pointer" onclick="evaluateSimAnswer(2)">שלח לבדיקה וניתוח</button>
-                        <div id="sim-feedback-2" class="hidden p-4 rounded-xl text-sm"></div>
-                    </div>
-                `;
-            }
-        }
-
-        function evaluateSimAnswer(id) {
-            const ans = document.getElementById('sim-ans-' + id).value.trim();
-            const feedback = document.getElementById('sim-feedback-' + id);
-            
-            if(ans.length < 15) {
-                alert('אנא רשמו תשובה מפורטת יותר כדי שנוכל לנתח אותה מקצועית.');
-                return;
-            }
-            
-            feedback.classList.remove('hidden', 'bg-rose-50', 'bg-emerald-50');
-            
-            if(ans.length > 40) {
-                feedback.classList.add('bg-emerald-50', 'text-emerald-800', 'border', 'border-emerald-200');
-                feedback.innerHTML = `<strong>ניתוח מקצועי:</strong> כל הכבוד! התשובה שלך עשירה ומראה על רצינות. שילבת עוגנים נכונים של שירות ואמפתיה. <br><span class="text-xs text-emerald-600 font-bold">+25 XP התווספו לניקוד שלך!</span>`;
-                addXP(25);
-            } else {
-                feedback.classList.add('bg-amber-50', 'text-amber-800', 'border', 'border-amber-200');
-                feedback.innerHTML = `<strong>ניתוח מקצועי:</strong> כיוון טוב, אך מומלץ להרחיב ולתת דוגמה ספציפית מהעבר כדי ליצור אמינות גבוהה יותר מול המראיין. <br><span class="text-xs text-amber-600 font-bold">+10 XP התווספו.</span>`;
-                addXP(10);
-            }
-        }
-
-        // חדר תרגול מתוזמן
-        const poolQuestions = [
-            "למה לדעתך את/ה מתאימ/ה לתפקיד שחוק ותובעני כמו זה?",
-            "כיצד את/ה מגיב/ה כשקולגה או מנהל מעביר עליך ביקורת מקצועית קשה?",
-            "תאר/י דילמה אתית או מקצועית שנתקלת בה בעבר ואיך פתרת אותה.",
-            "מהו החיסרון המרכזי שלך, ואיך הוא בא לידי ביטוי בעבודה היומיומית?",
-            "אם מטופל דורש טיפול או שירות שאינך מוסמך/ת או רשאי/ת לתת, מה תעשה/י?"
-        ];
-        let timerInterval;
-        function startPracticeSession() {
-            document.getElementById('practice-workspace').classList.remove('hidden');
-            const randQ = poolQuestions[Math.floor(Math.random() * poolQuestions.length)];
-            document.getElementById('practice-question-text').innerText = randQ;
-            
-            let time = 120; // 2 דקות
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                time--;
-                let m = String(Math.floor(time / 60)).padStart(2, '0');
-                let s = String(time % 60).padStart(2, '0');
-                document.getElementById('practice-timer').innerText = `${m}:${s}`;
-                if(time <= 0) {
-                    clearInterval(timerInterval);
-                    alert('הזמן הסתיים! תרגול מעולה. נסו להגריל שאלה נוספת.');
-                }
-            }, 1000);
-            addXP(5);
-        }
-
-        // מאגר שאלות למבחן המסכם
-        const examQuestions = [
-            {
-                q: "מה מייצגות האותיות במודל STAR המומלץ למענה בראיונות?",
-                a: [
-                    "Situation, Task, Action, Result (רקע, משימה, פעולה, תוצאה)",
-                    "System, Time, Action, Review (מערכת, זמן, פעולה, סקירה)",
-                    "Service, Team, Ability, Respect (שירות, צוות, יכולת, כבוד)",
-                    "Skills, Training, Ambition, Responsibility (מיומנויות, הדרכה, שאיפה, אחריות)"
-                ],
-                correct: 0
-            },
-            {
-                q: "כיצד הכי נכון להציג 'חיסרון' או 'נקודה לשיפור' בראיון עבודה?",
-                a: [
-                    "להגיד 'אין לי חסרונות, אני פרפקציוניסט שעובד קשה מדי'",
-                    "להציג חיסרון אמיתי ולא פוגעני לתפקיד, יחד עם הדרך והכלים שבהם אתם משפרים אותו ביום-יום",
-                    "להגיד חיסרון חמור מאוד כמו 'קשה לי להתעורר בבוקר ולהגיע בזמן'",
-                    "להתחמק מהשאלה ולעבור לדבר על היתרונות"
-                ],
-                correct: 1
-            },
-            {
-                q: "מטופל או לקוח צועק עליכם בטלפון או בפומבי משום שהמערכת התעכבה. מה הצעד הראשון?",
-                a: [
-                    "להסביר לו מיד שהוא טועה ושהעיכוב מוצדק",
-                    "לנתק את השיחה או לקרוא למנהל מיד בלי להקשיב",
-                    "להקשיב בלי לקטוע אותו, לתת לגיטימציה לכעס שלו (אמפתיה), ורק אז להתמקד בפתרון הבעיה",
-                    "לצעוק בחזרה כדי להבהיר שיש גבולות"
-                ],
-                correct: 2
-            },
-            {
-                q: "לפי המחקרים, כמה זמן לוקח למראיין ממוצע לגבש רושם ראשוני מוצק עליכם?",
-                a: [
-                    "רק בסוף הראיון, לאחר שקלול כל התשובות",
-                    "ב-5 הדקות הראשונות של הראיון",
-                    "שעה שלמה לאחר הראיון",
-                    "חצי שעה לפחות"
-                ],
-                correct: 1
-            },
-            {
-                q: "מהי הדרך הטובה ביותר להתמודד עם שאלות על שחיקה ועומס בראיון לתפקידי בריאות?",
-                a: [
-                    "להגיד שאני אף פעם לא נשחק/ת ושום דבר לא משפיע עליי",
-                    "להודות שתפקידי טיפול ושירות הם אכן שוחקים, ולהציג מנגנוני התמודדות בריאים (הפרדה בין בית לעבודה, ספורט, תמיכה מהצוות)",
-                    "להגיד שאם יהיה עומס פשוט אבקש פחות משמרות",
-                    "להתלונן על כך שהשכר לא מספיק גבוה לעומס כזה"
-                ],
-                correct: 1
-            }
-        ];
-
-        let currentExamIndex = 0;
-        let examScore = 0;
-
-        function startFinalExam() {
-            currentExamIndex = 0;
-            examScore = 0;
-            document.getElementById('btn-start-exam').classList.add('hidden');
-            document.getElementById('exam-workspace').classList.remove('hidden');
-            renderExamQuestion();
-        }
-
-        function renderExamQuestion() {
-            document.getElementById('exam-progress').innerText = `שאלה ${currentExamIndex + 1} מתוך ${examQuestions.length}`;
-            const currentQ = examQuestions[currentExamIndex];
-            
-            let html = `<p class="font-bold text-lg text-slate-800">${currentQ.q}</p><div class="grid grid-cols-1 gap-2 pt-2">`;
-            
-            currentQ.a.forEach((option, idx) => {
-                html += `
-                    <button onclick="submitExamAnswer(${idx})" class="w-full text-right p-3.5 border rounded-xl hover:bg-teal-50 hover:border-teal-300 transition-all text-sm font-medium text-slate-700 cursor-pointer flex justify-between items-center group">
-                        <span>${idx + 1}. ${option}</span>
-                        <i class="fa-solid fa-chevron-left text-xs opacity-0 group-hover:opacity-100 text-teal-600 transition-all"></i>
-                    </button>
-                `;
-            });
-            
-            html += `</div>`;
-            document.getElementById('exam-question-box').innerHTML = html;
-        }
-
-        function submitExamAnswer(selectedIdx) {
-            const currentQ = examQuestions[currentExamIndex];
-            if(selectedIdx === currentQ.correct) {
-                examScore++;
-            }
-            
-            currentExamIndex++;
-            if(currentExamIndex < examQuestions.length) {
-                renderExamQuestion();
-            } else {
-                finishExam();
-            }
-        }
-
-        function finishExam() {
-            const finalPercent = Math.round((examScore / examQuestions.length) * 100);
-            let feedbackText = "";
-            let textClass = "";
-            
-            if(finalPercent >= 80) {
-                feedbackText = "מצוין! הפגנת שליטה מוחלטת בעקרונות הראיון, מודל STAR ובגישה הטיפולית הנדרשת. את/ה מוכנ/ה לראיון!";
-                textClass = "text-emerald-700 bg-emerald-50 border-emerald-200";
-                addXP(50);
-            } else if(finalPercent >= 60) {
-                feedbackText = "תוצאה טובה, אך מומלץ לעבור שוב על לשונית 'עשה ואל תעשה' ועל מרכז הידע כדי לחדד נקודות מפתח קטנות.";
-                textClass = "text-amber-700 bg-amber-50 border-amber-200";
-                addXP(25);
-            } else {
-                feedbackText = "מומלץ לקרוא שוב את יסודות הראיון ולנסות לתרגל בסימולטור השאלות לפני שמתייצבים לראיון אמת.";
-                textClass = "text-rose-700 bg-rose-50 border-rose-200";
-            }
-            
-            document.getElementById('exam-question-box').innerHTML = `
-                <div class="text-center p-6 rounded-2xl border ${textClass} space-y-4 shadow-inner">
-                    <i class="fa-solid fa-graduation-cap text-4xl"></i>
-                    <h4 class="text-2xl font-black">המבחן הסתיים בהצלחה!</h4>
-                    <div class="text-3xl font-extrabold">הציון שלך: ${finalPercent}%</div>
-                    <p class="text-sm max-w-md mx-auto font-medium">${feedbackText}</p>
-                    <button onclick="startFinalExam()" class="mt-4 bg-slate-800 text-white text-xs px-4 py-2 rounded-xl font-bold cursor-pointer hover:bg-slate-900 transition-colors">נסה שוב</button>
-                </div>
-            `;
-            document.getElementById('btn-start-exam').classList.remove('hidden');
-            document.getElementById('btn-start-exam').innerText = "התחל מבחן מחדש";
-        }
-
-        // טעינה ראשונית
-        window.addEventListener('DOMContentLoaded', () => {
-            loadSimulatorCategory('intro');
-        });
-    </script>
-</body>
-</html>
+                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">
