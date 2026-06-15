@@ -2,304 +2,202 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ראיון מנצח – הכנה חכמה לראיון עבודה</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>ראיון מנצח – הכנה לראיון עבודה</title>
     <style>
-        body {
-            font-family: 'Assistant', sans-serif;
-            background-color: #f0f7f4;
-        }
-        /* פקודה חותכת וחד-משמעית להצגה והסתרה של טאבים */
-        .tab-content { 
-            display: none !important; 
-        }
-        .tab-content.active { 
-            display: block !important; 
-        }
+        body { font-family: Arial, sans-serif; background-color: #f0f7f4; margin: 0; padding: 0; text-align: right; }
+        header { bg-color: #0d9488; background: linear-gradient(to right, #0f766e, #0e7490); color: white; padding: 20px; text-align: center; }
+        nav { background-color: #115e59; padding: 10px; text-align: center; }
+        nav button { background: none; border: none; color: #ccfbf1; font-size: 16px; font-weight: bold; padding: 10px 20px; cursor: pointer; margin: 0 5px; }
+        nav button.active { color: white; border-bottom: 3px solid white; }
+        main { max-w: 800px; margin: 20px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .btn-action { background-color: #0d9488; color: white; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; }
+        .btn-action:hover { background-color: #0f766e; }
+        .question-box { background-color: #f8fafc; border-right: 4px solid #0e7490; padding: 15px; margin-bottom: 15px; border-radius: 4px; }
+        .ans-btn { display: block; w-full: 100%; width: 100%; text-align: right; padding: 12px; border: 1px solid #cbd5e1; margin: 8px 0; border-radius: 8px; background: white; cursor: pointer; font-size: 15px; }
+        .ans-btn:hover { background-color: #f0fdfa; border-color: #0d9488; }
+        textarea { width: 100%; height: 100px; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; box-sizing: border-box; }
+        .feedback { background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 15px; border-radius: 8px; margin-top: 10px; }
     </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+<body>
 
-    <header class="bg-gradient-to-r from-teal-700 via-cyan-700 to-emerald-700 text-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <div class="bg-white text-teal-700 p-2.5 rounded-full shadow-inner flex items-center justify-center">
-                    <i class="fa-solid fa-user-md text-2xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl md:text-2xl font-extrabold tracking-wide">ראיון מנצח</h1>
-                    <p class="text-xs text-teal-100 font-medium">הכנה חכמה לראיונות עבודה בתחומי הבריאות והשירות</p>
-                </div>
+    <header>
+        <h1 style="margin:0;">ראיון מנצח</h1>
+        <p style="margin:5px 0 0 0;">הכנה חכמה ואינטראקטיבית לראיונות עבודה בתחומי הבריאות והשירות</p>
+        <p style="font-weight:bold; color:#fef08a;">ניקוד: <span id="xp-display">0</span> XP</p>
+    </header>
+
+    <nav>
+        <button onclick="switchTab('home')" id="btn-home" class="active">דף הבית</button>
+        <button onclick="switchTab('simulator')" id="btn-simulator">סימולטור אינטראקטיבי</button>
+        <button onclick="switchTab('practice')" id="btn-practice">חדר תרגול מתוזמן</button>
+        <button onclick="switchTab('exam')" id="btn-exam">מבחן מסכם (10 שאלות)</button>
+    </nav>
+
+    <main>
+        <div id="home" class="tab-content active">
+            <h2>ברוכים הבאים לתוכנת ההכנה לראיון עבודה!</h2>
+            <p>האתר הזה נבנה במיוחד כדי לעזור לך לעבור את הראיון הבא בקופות החולים, מוקדי השירות או בתי החולים בביטחון מלא.</p>
+            
+            <div style="background:#1e293b; color:white; padding:30px; text-align:center; border-radius:12px; margin:20px 0;">
+                <p style="font-size:18px; font-weight:bold; color:#2dd4bf;">[ סרטון הדרכה ]</p>
+                <p style="font-size:14px; color:#94a3b8;">כאן ישולב הסרטון שלך. לחצי על הכפתור מטה להסבר קצר:</p>
+                <button onclick="alert('כאן המשתמש יראה את סרטון הפתיחה על מבנה הראיון ומודל STAR.')" style="background:#0d9488; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:bold;">הפעל סרטון הסבר</button>
             </div>
             
-            <div class="flex items-center gap-4 bg-white/10 px-4 py-2 rounded-xl backdrop-blur-sm text-sm border border-white/20">
-                <div class="flex items-center gap-1.5" title="ניקוד כולל">
-                    <i class="fa-solid fa-star text-amber-400"></i>
-                    <span class="font-bold" id="global-xp">0</span> <span class="text-xs text-teal-200">XP</span>
-                </div>
-                <div class="h-4 w-px bg-white/20"></div>
-                <div class="flex items-center gap-1.5" title="דרגה נוכחית">
-                    <i class="fa-solid fa-medal text-emerald-400"></i>
-                    <span class="font-bold text-xs" id="global-rank">מתלמד/ת</span>
-                </div>
+            <button onclick="switchTab('simulator')" class="btn-action">התחל בהכנה האינטראקטיבית שלך כאן &larr;</button>
+        </div>
+
+        <div id="simulator" class="tab-content">
+            <h2>סימולטור ראיונות אינטראקטיבי</h2>
+            <p>עני על השאלה הפתוחה מטה ולחצי על הכפתור כדי לקבל ניתוח מקצועי מיידי של התשובה שלך.</p>
+            
+            <div class="question-box">
+                <span style="background:#ccfbf1; color:#0f766e; padding:3px 8px; font-size:12px; font-weight:bold; border-radius:3px;">שאלה מתוך ראיון אמת</span>
+                <h3 style="margin:10px 0;">"ספר/י לי על מקרה שבו נאלצת להתמודד עם מטופל או לקוח כועס מאוד בטלפון או בפומבי. כיצד פעלת?"</h3>
+                <textarea id="sim-input" placeholder="הקלידו כאן את תשובתכם (למשל: הקשבתי לו, השתמשתי במודל STAR...)..."></textarea>
+                <button onclick="checkSimulator()" class="btn-action" style="margin-top:10px; font-size:14px; padding:10px 20px;">שלח תשובה לבדיקה</button>
+            </div>
+            <div id="sim-feedback" class="feedback" style="display:none;"></div>
+        </div>
+
+        <div id="practice" class="tab-content">
+            <h2>חדר תרגול מתוזמן תחת לחץ זמנים</h2>
+            <p>לחצי על הכפתור כדי להגריל שאלת ראיון אקראית. לרשותך 2 דקות בלבד לחשוב ולתרגל את המענה בקול רם!</p>
+            <button onclick="generatePractice()" class="btn-action" style="background-color:#ea580c;">הגרל שאלה והפעל טיימר</button>
+            
+            <div id="practice-box" style="display:none; margin-top:20px; padding:20px; border:2px dashed #ea580c; border-radius:8px;">
+                <h3 id="practice-question" style="color:#1e293b;"></h3>
+                <div style="font-size:24px; font-weight:bold; color:#dc2626; margin-top:10px;">זמן נותר: <span id="timer-display">02:00</span></div>
             </div>
         </div>
 
-        <nav class="bg-teal-800 border-t border-teal-900/40 overflow-x-auto">
-            <div class="max-w-7xl mx-auto px-2 flex whitespace-nowrap text-sm font-semibold" id="nav-container">
-                <button onclick="switchTab('home')" id="btn-home" class="nav-btn px-4 py-3 text-white border-b-2 border-white flex items-center gap-2 transition-all cursor-pointer"><i class="fa-solid fa-house"></i> דף הבית</button>
-                <button onclick="switchTab('foundations')" id="btn-foundations" class="nav-btn px-4 py-3 text-teal-200 border-b-2 border-transparent hover:text-white flex items-center gap-2 transition-all cursor-pointer"><i class="fa-solid fa-graduation-cap"></i> יסודות הראיון</button>
-                <button onclick="switchTab('research')" id="btn-research" class="nav-btn px-4 py-3 text-teal-200 border-b-2 border-transparent hover:text-white flex items-center gap-2 transition-all cursor-pointer"><i class="fa-solid fa-book-bookmark"></i> מרכז ידע מחקרי</button>
-                <button onclick="switchTab('simulator')" id="btn-simulator" class="nav-btn px-4 py-3 text-teal-200 border-b-2 border-transparent hover:text-white flex items-center gap-2 transition-all cursor-pointer"><i class="fa-solid fa-comments"></i> סימולטור אינטראקטיבי</button>
-                <button onclick="switchTab('dos-donts')" id="btn-dos-donts" class="nav-btn px-4 py-3 text-teal-200 border-b-2 border-transparent hover:text-white flex items-center gap-2 transition-all cursor-pointer"><i class="fa-solid fa-circle-check"></i> עשה ואל תעשה</button>
-                <button onclick="switchTab('practice')" id="btn-practice" class="nav-btn px-4 py-3 text-amber-300 border-b-2 border-transparent hover:text-amber-300 flex items-center gap-2 transition-all cursor-pointer"><i class="fa-solid fa-stopwatch"></i> חדר תרגול</button>
-                <button onclick="switchTab('exam')" id="btn-exam" class="nav-btn px-4 py-3 text-cyan-300 border-b-2 border-transparent hover:text-cyan-300 flex items-center gap-2 transition-all cursor-pointer"><i class="fa-solid fa-file-signature"></i> מבחן מסכם</button>
+        <div id="exam" class="tab-content">
+            <h2>מבחן מסכם אמריקאי – 10 שאלות מוכנות</h2>
+            <p id="exam-intro">המבחן יבדוק את הידע שלך בנושאי אתיקה, שירות, לחץ ומודל STAR.</p>
+            <div id="exam-workspace">
+                <button onclick="startExam()" class="btn-action" style="background-color:#0284c7;">התחל את המבחן כעת</button>
             </div>
-        </nav>
-    </header>
-
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4">
-
-        <section id="home" class="tab-content active space-y-8">
-            <div class="bg-gradient-to-br from-white to-teal-50/50 p-6 md:p-10 rounded-2xl shadow-sm border border-teal-100 flex flex-col md:flex-row items-center gap-8">
-                <div class="flex-1 space-y-4">
-                    <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">למידה אינטראקטיבית מבוססת מחקר</span>
-                    <h2 class="text-3xl md:text-5xl font-black text-slate-800 leading-tight">לעבור את הראיון הבא שלך <br><span class="text-teal-600">בביטחון ובמקצועיות</span></h2>
-                    <p class="text-slate-600 leading-relaxed text-base">
-                        ברוכים הבאים לפלטפורמת ההדרכה המתקדמת ביותר בישראל המותאמת במיוחד למקצועות הבריאות, הסיעוד, המוקדים הרפואיים וקופות החולים.
-                    </p>
-                    <div class="pt-2">
-                        <button onclick="switchTab('foundations')" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg transition-all cursor-pointer">
-                            התחל הכנה חכמה עכשיו <i class="fa-solid fa-arrow-left"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="w-full md:w-5/12 bg-slate-900 aspect-video rounded-xl shadow-xl overflow-hidden relative flex flex-col items-center justify-center text-white p-6 text-center border-2 border-teal-600/30">
-                    <div class="bg-teal-600 hover:bg-teal-500 text-white p-4 rounded-full mb-3 cursor-pointer transition-all shadow-md" onclick="alert('כאן ישולב סרטון ההדרכה שלך! כרגע זהו מקום ייעודי המציג כיצד הנגן ישתלב בעיצוב האתר.')">
-                        <i class="fa-solid fa-play text-2xl text-white"></i>
-                    </div>
-                    <p class="font-bold text-sm text-teal-200">סרטון פתיחה: מדוע ראיונות רפואיים מצליחים או נכשלים?</p>
-                    <p class="text-xs text-slate-400 mt-1">לחצו על כפתור הניגון להסבר</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex items-start gap-4">
-                    <div class="bg-amber-100 text-amber-700 p-3 rounded-xl"><i class="fa-solid fa-stopwatch text-2xl"></i></div>
-                    <div>
-                        <h4 class="text-xl font-bold text-slate-800">פסקי דין מהירים</h4>
-                        <p class="text-sm text-slate-500 mt-1">למעלה מ-**30%** מהמראיינים מגבשים דעה מוצקה על המועמד כבר ב-5 הדקות הראשונות.</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex items-start gap-4">
-                    <div class="bg-rose-100 text-rose-700 p-3 rounded-xl"><i class="fa-solid fa-heart-crack text-2xl"></i></div>
-                    <div>
-                        <h4 class="text-xl font-bold text-slate-800">השפעת חרדת הראיון</h4>
-                        <p class="text-sm text-slate-500 mt-1">חרדה גבוהה מפחיתה ב-**42%** את היכולת לשלוף דוגמאות איכותיות מהזיכרון.</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex items-start gap-4">
-                    <div class="bg-emerald-100 text-emerald-700 p-3 rounded-xl"><i class="fa-solid fa-square-poll-vertical text-2xl"></i></div>
-                    <div>
-                        <h4 class="text-xl font-bold text-slate-800">הכוח של שיטת STAR</h4>
-                        <p class="text-sm text-slate-500 mt-1">תשובות מובנות בשיטה זו זוכות לציון התאמה גבוה ב-**65%** יותר.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="foundations" class="tab-content space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm">
-                <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-teal-600"></i> יסודות ראיון העבודה והתאמה ארגונית</h3>
-                <p class="text-slate-600 mb-6">לחצו על הכרטיסיות מטה כדי להבין מה באמת קורה בתוך מוחו של המראיין.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="p-5 border border-slate-200 rounded-xl bg-slate-50 cursor-pointer" onclick="this.querySelector('.desc').classList.toggle('hidden')">
-                        <h4 class="font-bold text-teal-800 text-lg flex justify-between items-center">
-                            <span><i class="fa-solid fa-bullseye"></i> מטרות הראיון האמיתיות</span>
-                            <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
-                        </h4>
-                        <p class="desc text-sm text-slate-600 leading-relaxed mt-2 hidden">המראיין אינו מחפש רק ידע מקצועי, אלא בודק הפחתת סיכונים לארגון, רמת מוטיבציה אמיתית ויכולת החזקה לאורך זמן תחת שחיקה.</p>
-                    </div>
-
-                    <div class="p-5 border border-slate-200 rounded-xl bg-slate-50 cursor-pointer" onclick="this.querySelector('.desc').classList.toggle('hidden')">
-                        <h4 class="font-bold text-teal-800 text-lg flex justify-between items-center">
-                            <span><i class="fa-solid fa-eye"></i> מה המראיין באמת בודק?</span>
-                            <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
-                        </h4>
-                        <p class="desc text-sm text-slate-600 leading-relaxed mt-2 hidden">שילוב של 3 וקטורים: יכולת מקצועית (Can do), מוטיבציה והנעה (Will do), והתאמה תרבותית לצוות (Will fit).</p>
-                    </div>
-
-                    <div class="p-5 border border-slate-200 rounded-xl bg-slate-50 cursor-pointer" onclick="this.querySelector('.desc').classList.toggle('hidden')">
-                        <h4 class="font-bold text-teal-800 text-lg flex justify-between items-center">
-                            <span><i class="fa-solid fa-wand-magic-sparkles"></i> רושם ראשוני</span>
-                            <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
-                        </h4>
-                        <p class="desc text-sm text-slate-600 leading-relaxed mt-2 hidden">לבוש הולם, הגעה בזמן (10 דקות לפני), חיוך ראשוני, וברכת שלום יציבה יוצרים עוגן חיובי קשה לערעור.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="research" class="tab-content space-y-8">
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-book-bookmark text-teal-600"></i> מרכז ידע מבוסס מחקר אקדמי</h3>
-                <p class="text-slate-600">הכנה יעילה נשענת על עובדות ומחקרים. להלן שלושה מחקרי מפתח ויישומם המעשי בשטח.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 space-y-4">
-                    <div class="flex items-center gap-2 text-rose-600 font-bold text-lg">
-                        <span class="bg-rose-100 px-2 py-1 rounded text-sm">מחקר 1</span>
-                        <h4>Interview Anxiety and Interview Performance</h4>
-                    </div>
-                    <p class="text-slate-700 text-sm">
-                        <strong>ממצא מרכזי:</strong> חרדת ראיון משפיעה לרעה באופן ישיר על איכות הביצוע בראיון. החרדה חוסמת את זיכרון העבודה ומקשה על שליפת נתונים.
-                    </p>
-                </div>
-                <div class="bg-rose-50 p-4 rounded-xl border border-rose-100 flex flex-col justify-between">
-                    <button onclick="alert('התחילו בנשימת קופסה כעת: שאפו אוויר לאט במשך 4 שניות, החזיקו 4 שניות, ונשפו 4 שניות...')" class="w-full bg-rose-600 text-white font-bold text-xs py-2 rounded-lg hover:bg-rose-700 transition-colors cursor-pointer">הפעל תרגיל נשימה אינטראקטיבי</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="simulator" class="tab-content space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h3 class="text-2xl font-bold text-slate-800 mb-1 flex items-center gap-2"><i class="fa-solid fa-comments text-teal-600"></i> סימולטור ראיונות דינמי</h3>
-                    <p class="text-slate-600 text-sm">בחרו קטגוריה, ענו על השאלות וקבלו ניתוח מקצועי וציון מיידי להתקדמותכם.</p>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="loadSimulatorCategory('intro')" class="bg-teal-600 text-white text-xs font-bold px-3 py-2 rounded-xl cursor-pointer">א. שאלות היכרות</button>
-                    <button onclick="loadSimulatorCategory('service')" class="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-2 rounded-xl cursor-pointer">ב. שאלות שירות והתמודדות</button>
-                </div>
-            </div>
-
-            <div id="simulator-box" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-                </div>
-        </section>
-
-        <section id="dos-donts" class="tab-content space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-circle-check text-teal-600"></i> מודול ממוקד: עשה ואל תעשה</h3>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm space-y-4">
-                    <h4 class="font-extrabold text-emerald-700 text-lg border-b pb-2">✓ חלק א' – עשה (DO)</h4>
-                    <p class="text-sm"><strong>הגעה בזמן:</strong> הגעה 10 דקות קודם מאפשרת הסדרת נשימה וארגון מחשבות.</p>
-                    <p class="text-sm"><strong>שימוש במודל STAR:</strong> תיאור מובנה של מקרה: רקע, המשימה, הפעולה שנקטת והתוצאה הסופית.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-rose-100 shadow-sm space-y-4">
-                    <h4 class="font-extrabold text-rose-700 text-lg border-b pb-2">✗ חלק ב' – אל תעשה (DON'T)</h4>
-                    <p class="text-sm"><strong>דיבור שלילי:</strong> לעולם אל תציגו באור שלילי את מקום העבודה הקודם או את המנהל לשעבר.</p>
-                    <p class="text-sm"><strong>תשובות קצרות מדי:</strong> הימנעו מתשובות של "כן" ו"לא" בלי להרחיב ולתת דוגמה מהשטח.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="practice" class="tab-content space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h3 class="text-2xl font-bold text-slate-800 mb-1 flex items-center gap-2"><i class="fa-solid fa-stopwatch text-amber-600"></i> חדר תרגול מתוזמן (סימולציית לחץ)</h3>
-                    <p class="text-slate-500 text-sm">הגרילו שאלת אמת מראיונות ונסו לענות עליה בקול רם לפני שהטיימר מסתיים.</p>
-                </div>
-                <button onclick="startPracticeSession()" class="bg-amber-600 text-white font-bold text-sm px-6 py-2.5 rounded-xl cursor-pointer hover:bg-amber-700 transition-all">
-                    הגרל שאלה והתחל טיימר <i class="fa-solid fa-dice"></i>
-                </button>
-            </div>
-            <div id="practice-workspace" class="hidden bg-white p-6 rounded-2xl border border-amber-300 space-y-4 shadow-sm">
-                <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
-                    <h4 id="practice-question-text" class="text-lg font-bold text-slate-800"></h4>
-                </div>
-                <div class="text-2xl font-black text-rose-600 flex items-center gap-2">
-                    <i class="fa-solid fa-clock-rotate-left animate-pulse"></i> זמנך לענות: <span id="practice-timer">02:00</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="exam" class="tab-content space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-center">
-                <h3 class="text-2xl font-bold text-slate-800 mb-1">מבחן מסכם מקיף – מוכנות לראיון</h3>
-                <p class="text-slate-500 text-sm mb-4">המבחן המורחב מכיל 10 שאלות מפתח מורכבות בנושאי סיעוד, שירות מטופלים בקופות חולים, אתיקה רפואית ועבודה בצוות.</p>
-                <button onclick="startFinalExam()" id="btn-start-exam" class="bg-cyan-600 text-white font-bold px-8 py-3 rounded-xl cursor-pointer mt-2 hover:bg-cyan-700 shadow-md transition-all">התחל מבחן מורחב כעת</button>
-            </div>
-            
-            <div id="exam-workspace" class="hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-md space-y-6">
-                <div class="flex justify-between items-center border-b pb-3">
-                    <span class="font-bold text-slate-600" id="exam-progress">שאלה 1 מתוך 10</span>
-                    <span class="text-xs bg-cyan-100 text-cyan-800 px-2 py-1 rounded-full font-bold">מבחן פעיל</span>
-                </div>
-                <div id="exam-question-box" class="space-y-4">
-                    </div>
-            </div>
-        </section>
-
+        </div>
     </main>
 
-    <footer class="bg-slate-800 text-slate-400 text-xs py-6 border-t border-slate-700 text-center mt-12">
-        <p class="font-semibold text-slate-300">ראיון מנצח © 2026</p>
-    </footer>
-
     <script>
-        // ניהול ניקוד
         let xp = 0;
-        function addXP(amount) {
-            xp += amount;
-            document.getElementById('global-xp').innerText = xp;
-            
-            let rank = "מתלמד/ת";
-            if (xp >= 50) rank = "עוזר/ת מקצועי/ת";
-            if (xp >= 120) rank = "מומחה/ית ראיונות";
-            if (xp >= 200) rank = "מאסטר בראיונות בריאות";
-            document.getElementById('global-rank').innerText = rank;
-        }
 
-        // פונקציית ניווט חסינת תקלות - פותרת את בעיית הטאבים לתמיד
+        // פונקציית הניווט הפשוטה והבטוחה בעולם
         function switchTab(tabId) {
-            // הסתרת כל התכנים באופן אקטיבי ומיידי
-            const allContents = document.querySelectorAll('.tab-content');
-            for(let i=0; i<allContents.length; i++) {
-                allContents[i].classList.remove('active');
+            // הסתרת כל הטאבים
+            var contents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].style.display = 'none';
             }
+            // הצגת הטאב הנבחר
+            document.getElementById(tabId).style.display = 'block';
 
-            // הצגת התוכן הספציפי שנבחר
-            const targetContent = document.getElementById(tabId);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
-
-            // עדכון המראה של כפתורי הניווט
-            const allButtons = document.querySelectorAll('.nav-btn');
-            allButtons.forEach(btn => {
-                btn.classList.remove('text-white', 'border-white');
-                btn.classList.add('text-teal-200', 'border-transparent');
-            });
-
-            const activeButton = document.getElementById('btn-' + tabId);
-            if (activeButton) {
-                activeButton.classList.remove('text-teal-200', 'border-transparent');
-                activeButton.classList.add('text-white', 'border-white');
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // עדכון הכפתורים בנבאר
+            var buttons = document.querySelectorAll('nav button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + tabId).classList.add('active');
         }
 
-        // סימולטור
-        function loadSimulatorCategory(cat) {
-            const box = document.getElementById('simulator-box');
-            if(cat === 'intro') {
-                box.innerHTML = `
-                    <div class="space-y-4">
-                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">שאלת היכרות</span>
-                        <h4 class="font-bold text-lg text-slate-800">"ספר/י לי על עצמך ומה מושך אותך לעבוד דווקא בארגון רפואי/שירותי כמו שלנו?"</h4>
-                        <textarea id="sim-ans-1" class="w-full border p-3 mt-2 rounded-xl outline-none text-sm h-28" placeholder="הקלידו את תשובתכם כאן בפירוט..."></textarea>
-                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl text-sm font-bold transition-colors cursor-pointer" onclick="evaluateSimAnswer(1)">שלח לבדיקה
+        // לוגיקה של הסימולטור
+        function checkSimulator() {
+            var text = document.getElementById('sim-input').value.trim();
+            if(text.length < 10) {
+                alert('אנא הקלידו תשובה ארוכה ומפורטת יותר כדי שנוכל לנתח אותה.');
+                return;
+            }
+            var fb = document.getElementById('sim-feedback');
+            fb.style.display = 'block';
+            fb.innerHTML = "<strong>ניתוח מערכת:</strong> תשובתך נקלטה בהצלחה! שילבת אלמנטים של הקשבה ואמפתיה. מומלץ לוודא שאת/ה מציג/ה תוצאה חיובית בסוף המענה לפי מודל STAR.<br><span style='font-weight:bold;color:#166534;'>+25 נקודות XP נוספו ללוח הבקרה שלך!</span>";
+            xp += 25;
+            document.getElementById('xp-display').innerText = xp;
+        }
+
+        // לוגיקה של חדר התרגול
+        let timer;
+        const questionsPool = [
+            "מדוע את/ה רוצה לעבוד דווקא במוקד אחיות/קופת חולים שלנו?",
+            "איך תתמודד/י עם ריבוי משימות במקביל כשהטלפון לא מפסיק לצלצל?",
+            "ספר/י על טעות מקצועית או שירותית שעשית בעבר ואיך תיקנת אותה.",
+            "מהן החוזקות המרכזיות שלך שמתאימות לעולם הטיפול והבריאות?",
+            "איך את/ה מגיב/ה כשמטופל כועס צועק ומאשים אותך אישית בבעיה של המערכת?"
+        ];
+        function generatePractice() {
+            document.getElementById('practice-box').style.display = 'block';
+            var q = questionsPool[Math.floor(Math.random() * questionsPool.length)];
+            document.getElementById('practice-question').innerText = `שאלה לתרגול: "${q}"`;
+            
+            let time = 120;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                time--;
+                let m = String(Math.floor(time / 60)).padStart(2, '0');
+                let s = String(time % 60).padStart(2, '0');
+                document.getElementById('timer-display').innerText = m + ":" + s;
+                if(time <= 0) {
+                    clearInterval(timer);
+                    alert('הזמן הסתיים! כל הכבוד על התרגול.');
+                }
+            }, 1000);
+            xp += 5;
+            document.getElementById('xp-display').innerText = xp;
+        }
+
+        // לוגיקה של המבחן האמריקאי (10 שאלות מלאות)
+        const examData = [
+            { q: "מה מייצגות האותיות במודל STAR המומלץ לראיונות?", a: ["Situation, Task, Action, Result", "System, Time, Answer, Report", "Service, Team, Ability, Respect", "Skills, Training, Ambition, Responsibility"], c: 0 },
+            { q: "כיצד הכי נכון להציג 'חיסרון' בראיון עבודה?", a: ["לומר שאין לי שום חסרונות", "להציג חיסרון אמיתי ולא הרסני, לצד הכלים שבהם אתם משפרים אותו", "להגיד 'אני פרפקציוניסט שעובד קשה מדי'", "להציג חסרון קשה כמו 'אני תמיד מאחר'"], c: 1 },
+            { q: "מטופל צועק עליכם בטלפון בגלל תור רחוק שנקבע לו. מה הצעד הראשון?", a: ["להסביר לו שהוא טועה ולצעוק בחזרה", "לנתק לו את השיחה מיד", "להקשיב בלי לקטוע, להפגין אמפתיה, ורק אז לחפש פתרון", "להעביר אותו מיד למנהל בלי לדבר"], c: 2 },
+            { q: "לפי המחקרים, תוך כמה זמן מראיינים מגבשים רושם ראשוני מוצק?", a: ["רק בסוף הראיון", "ב-5 הדקות הראשונות של הראיון", "אחרי שעה של שיחה", "לאחר שבוע של מחשבה"], c: 1 },
+            { q: "מהי הדרך הטובה להתמודד עם שאלת שחיקה ועומס בראיון בתחום הרפואי?", a: ["לומר שאני לעולם לא נשחק/ת ושום דבר לא משפיע עליי", "להודות שהתחום שוחק ולהציג מנגנוני התמודדות בריאים שלכם (ספורט, הפרדה מהבית)", "להגיד שאם יהיה עומס אבקש פחות משמרות", "להתלונן שהשכר נמוך מדי לעומס כזה"], c: 1 },
+            { q: "מהי החשיבות של שמירה על סודיות רפואית במוקד קופת חולים?", a: ["אין חשיבות, מותר לספר הכל לחברים", "חשיבות עליונה, מדובר בחובה חוקית ואתית קפדנית להגנת פרטיות המטופל", "רק אם המטופל מבקש במפורש נשמור על סודיות", "זה תקף רק לרופאים, לא לנציגי מוקד או אחיות"], c: 1 },
+            { q: "מה המטרה של המראיין כשהוא שואל 'מדוע עזבת את מקום העבודה הקודם'?", a: ["לשמוע לכלוך ורכילות על חברות מתחרות", "לבדוק את רמת האתיקה והמקצועיות שלך ואת המניעים האמיתיים לצמיחה", "לדעת כמה כסף הרווחת שם במדויק", "זו שאלה סתמית ללא מטרה"], c: 1 },
+            { q: "מטופל מבוגר מתקשה להבין הנחיות ומעכב את התור במוקד. מה תעשו?", a: ["תבקשו ממנו לצאת ולפנות מקום לצעירים", "תגייסו סבלנות, תנמיכו קצב דיבור, ותתנו לו הנחיות כתובות ופשוטות", "תצעקו עליו בקול רם יותר ויותר", "תתעלמו ממנו ותעברו למטופל הבא"], c: 1 },
+            { q: "מהי היציבה ושפת הגוף המומלצת במהלך ראיון עבודה פרונטלי?", a: ["ישיבה זקופה ונינוחה, נטייה קלה קדימה ושמירה על קשר עין מבוקר", "שילוב ידיים הדוק והישענות עמוקה לאחור", "משחק בעט והסתכלות על הרצפה", "רכינה מלאה קדימה והנחת מרפקים על השולחן"], c: 0 },
+            { q: "איפה את/ה רואה את עצמך בעוד 3 שנים מהיום? מהי התשובה המצופה?", a: ["אהיה המנהל של המחלקה הזו ואחליף אותך המראיין", "יציבות, רצון להעמיק במקצוע, להתמקצע בארגון ולקחת משימות הדרכה", "אפתח עסק עצמאי משלי ולא אצטרך לעבוד כאן", "אני לא מתכנן/ת קדימה, זורם/ת עם מה שיהיה"], c: 0 }
+        ];
+
+        let currentExamIdx = 0;
+        let examScore = 0;
+
+        function startExam() {
+            currentExamIdx = 0;
+            examScore = 0;
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            if(currentExamIdx >= examData.length) {
+                var percent = Math.round((examScore / examData.length) * 100);
+                var workspace = document.getElementById('exam-workspace');
+                workspace.innerHTML = `<div style='text-align:center; padding:20px; background:#f0fdf4; border-radius:8px;'><h3>המבחן הסתיים!</h3><p style='font-size:24px; font-weight:bold; color:#166534;'>הציון שלך: ${percent}%</p><p>ענית נכון על ${examScore} מתוך 10 שאלות.</p><button onclick='location.reload()' class='btn-action'>התחל את כל ההכנה מחדש</button></div>`;
+                xp += (examScore * 10);
+                document.getElementById('xp-display').innerText = xp;
+                return;
+            }
+
+            document.getElementById('exam-intro').innerText = `שאלה ${currentExamIdx + 1} מתוך ${examData.length}`;
+            var qObj = examData[currentExamIdx];
+            var html = `<div class='question-box'><h3>${qObj.q}</h3>`;
+            
+            qObj.a.forEach((ans, idx) => {
+                html += `<button class='ans-btn' onclick='handleExamAnswer(${idx})'>${idx + 1}. ${ans}</button>`;
+            });
+            
+            html += `</div>`;
+            document.getElementById('exam-workspace').innerHTML = html;
+        }
+
+        function handleExamAnswer(selectedIdx) {
+            if(selectedIdx === examData[currentExamIdx].c) {
+                examScore++;
+            }
+            currentExamIdx++;
+            renderQuestion();
+        }
+    </script>
+</body>
+</html>
